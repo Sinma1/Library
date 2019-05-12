@@ -4,7 +4,8 @@
 #include <list>
 #include <stdexcept>
 
-#include "Book.h"
+#include "BookModel.h"
+#include "DataSource.h"
 
 #ifndef BIBLIOTEKA_LIBRARYMANAGER_H
 #define BIBLIOTEKA_LIBRARYMANAGER_H
@@ -13,16 +14,18 @@
 class LibraryManager
 {
 public:
-    void AddNewBook(Book book);
+    void AddNewBook(BookModel book);
 
-    std::list<Book> GetAllBooks();
+    std::list<BookModel> GetAllBooks();
 
-    Book GetBook(unsigned int ID);
+    BookModel GetBook(unsigned int ID);
 
     void DeleteBook(unsigned int ID);
 
 private:
-    std::list<Book> book_list;
+    std::list<BookModel> book_list;
+
+    DataSource data_source = DataSource();
 
     bool LoadBooksFromSource();
 };

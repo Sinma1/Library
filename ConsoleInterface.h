@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-#include "Book.h"
+#include "BookModel.h"
 #include "LibraryManager.h"
 //
 
@@ -53,7 +53,7 @@ private:
 
     void AddBook();
 
-    void DisplayBook(Book const &book);
+    void DisplayBook(BookModel const &book);
 
     void ListBooks();
 

@@ -2,9 +2,9 @@
 // Created by sinma on 04.04.19.
 //
 
-#include "Book.h"
+#include "BookModel.h"
 
-Book::Book(
+BookModel::BookModel(
         std::string title,
         std::string author,
         unsigned int year_published,
@@ -16,7 +16,7 @@ Book::Book(
     this->publisher = publisher;
 }
 
-bool Book::Validate(Book const &book)
+bool BookModel::Validate(BookModel const &book)
 {
     if (book.title.length() <= 0 || book.title.length() > 100)
     {

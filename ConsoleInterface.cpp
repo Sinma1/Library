@@ -36,7 +36,7 @@ void ConsoleInterface::AddBook()
     std::string author;
     unsigned int year_published;
     std::string publisher;
-    Book *book;
+    BookModel *book;
 
     do
     {
@@ -52,8 +52,8 @@ void ConsoleInterface::AddBook()
         cout << "Podaj wydawce: ";
         cin >> publisher;
 
-        book = new Book(title, author, year_published, publisher);
-    } while (!Book::Validate(*book));
+        book = new BookModel(title, author, year_published, publisher);
+    } while (!BookModel::Validate(*book));
 
     this->library.AddNewBook(*book);
 }
@@ -101,7 +101,7 @@ void ConsoleInterface::GetBookDetails()
 
 }
 
-void ConsoleInterface::DisplayBook(Book const &book)
+void ConsoleInterface::DisplayBook(BookModel const &book)
 {
     cout << "ID: " << book.ID << "\t'" << book.title << "' - autora " << book.author
          << " wydana w " << book.year_published << " przez " << book.publisher << endl;

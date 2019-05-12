@@ -8,10 +8,10 @@
 #define BIBLIOTEKA_BOOK_H
 
 
-class Book
+class BookModel
 {
 public:
-    Book(std::string title, std::string author, unsigned int year_published, std::string publisher);
+    BookModel(std::string title, std::string author, unsigned int year_published, std::string publisher);
 
     unsigned int ID{};
     std::string title;
@@ -19,7 +19,7 @@ public:
     unsigned int year_published;
     std::string publisher;
 
-    static bool Validate(Book const &book);
+    static bool Validate(BookModel const &book);
 };
 
 

@@ -22,17 +22,17 @@ void ConsoleInterface::Run()
 
 std::function<void()> ConsoleInterface::GetMenuOption()
 {
-    int option;
-    cout << "Wybierz opcje:" << endl;
+    std::string command;
+    cout << "Wybierz komende:" << endl;
     for (auto const &action : this->actions)
-        cout << action.num << " - " << action.description << endl;
+        cout << action.command << " - " << action.description << endl;
 
     cout << ":> ";
-    cin >> option;
+    cin >> command;
 
-    int action_index = this->GetActionIndexByOptionNum(option);
+    int action_index = this->GetActionIndexByCommand(command);
     if (action_index == -1)
-        return []() { cout << "Nieznana opcja" << endl; };
+        return []() { cout << "Nieznana komenda" << endl; };
 
     return this->actions[action_index].action;
 }
@@ -67,7 +67,13 @@ void ConsoleInterface::AddBook()
 
 void ConsoleInterface::ListBooks()
 {
-    for (auto const &book : this->library.GetAllBooks())
+    auto books = this->library.GetAllBooks();
+    if (books.empty()) {
+        cout << "Brak ksiazek do wyswietlenia." << endl;
+        return;
+    }
+
+    for (auto const &book : books)
     {
         this->DisplayBook(book);
     }
@@ -88,7 +94,7 @@ int ConsoleInterface::GetActionIndexByCommand(const std::string& command)
 {
     for (int i = 0; i < this->actions.size(); i++)
     {
-        if (this->actions[i].num == num)
+        if (this->actions[i].command == command)
             return i;
     }
     return -1;

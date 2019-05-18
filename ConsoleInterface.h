@@ -18,15 +18,15 @@ using std::cin;
 class Action
 {
 public:
-    Action(std::function<void()> action, int num, std::string description)
+    Action(std::function<void()> action, std::string command, std::string description)
     {
         this->action = action;
-        this->num = num;
+        this->command = command;
         this->description = description;
     }
 
     std::function<void()> action;
-    int num;
+    std::string command;
     std::string description;
 };
 
@@ -38,11 +38,13 @@ public:
         this->library = LibraryManager();
 
         this->actions = {
-                Action(std::bind(&ConsoleInterface::AddBook, this), 1, "Dodaj ksiazke"),
-                Action(std::bind(&ConsoleInterface::ListBooks, this), 2, "Wypisz wszystkie ksiazki"),
-                Action(std::bind(&ConsoleInterface::GetBookDetails, this), 3, "Pokaz ksiazke po ID"),
-                Action(std::bind(&ConsoleInterface::DeleteBook, this), 3, "Usun ksiazke"),
-                Action(std::bind(&ConsoleInterface::Exit, this), 0, "Wyjdz z programu")
+                Action(std::bind(&ConsoleInterface::AddBook, this), "1", "Dodaj ksiazke"),
+                Action(std::bind(&ConsoleInterface::ListBooks, this), "2", "Wypisz wszystkie ksiazki"),
+                Action(std::bind(&ConsoleInterface::GetBookDetails, this), "3", "Pokaz ksiazke po ID"),
+                Action(std::bind(&ConsoleInterface::DeleteBook, this), "4", "Usun ksiazke"),
+
+                Action(std::bind(&ConsoleInterface::ClearScreen, this), "clear", "Wyczysc konsole"),
+                Action(std::bind(&ConsoleInterface::Exit, this), "exit", "Wyjdz z programu")
         };
     }
 
@@ -63,7 +65,9 @@ private:
 
     void Exit();
 
-    int GetActionIndexByOptionNum(int num);
+    void ClearScreen();
+
+    int GetActionIndexByCommand(const std::string& command);
 
     LibraryManager library;
     bool bRunning = true;

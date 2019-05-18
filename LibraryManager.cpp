@@ -4,7 +4,7 @@
 
 #include "LibraryManager.h"
 
-void LibraryManager::AddNewBook(BookModel book)
+void LibraryManager::AddNewBook(const BookModel &book)
 {
     this->book_list.push_back(book);
 }
@@ -33,12 +33,10 @@ std::list<BookModel> LibraryManager::GetAllBooks()
 
 void LibraryManager::DeleteBook(unsigned int ID)
 {
-    BookModel *book;
     try
     {
-        // TODO FIX THIS
-        *book = this->GetBook(ID);
-//        this->book_list.remove(*book);
+        auto book = this->GetBook(ID);
+        this->book_list.remove(book);
     }
     catch (const std::exception &e)
     {

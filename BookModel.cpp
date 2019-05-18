@@ -53,3 +53,16 @@ bool BookModel::CheckFilter(const std::string &field, const std::string &desired
 
     return (strFieldValue == desiredValue) || (strFieldValue.find(desiredValue) != std::string::npos && !bExact);
 }
+
+bool BookModel::operator==(const BookModel &book) const
+{
+    return title == book.title &&
+           author == book.author &&
+           year_published == book.year_published &&
+           publisher == book.publisher;
+}
+
+bool BookModel::operator!=(const BookModel &book) const
+{
+    return !operator==(book);
+}

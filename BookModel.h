@@ -22,6 +22,9 @@ public:
     static bool Validate(BookModel const &book);
 
     bool CheckFilter(const std::string &field, const std::string &desiredValue, const bool &bExact);
+
+    bool operator==(const BookModel &book) const;
+    bool operator!=(const BookModel &book) const;
 };
 
 

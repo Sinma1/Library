@@ -15,7 +15,7 @@
 class LibraryManager
 {
 public:
-    void AddNewBook(BookModel book);
+    void AddNewBook(const BookModel &book);
 
     std::list<BookModel> GetAllBooks();
 
@@ -31,7 +31,7 @@ public:
 private:
     std::list<BookModel> book_list;
 
-    DataSource data_source = DataSource();
+    DataSource dataSource = DataSource();
 
     bool LoadBooksFromSource();
 };

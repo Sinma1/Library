@@ -47,7 +47,7 @@ void LibraryManager::DeleteBook(unsigned int ID)
 }
 
 std::list<BookModel> LibraryManager::GetFilteredBooks(
-        const std::string &strField, const std::string &strDesiredValue, const bool &bExact
+        const std::string &field, const std::string &desiredValue, const bool &bExact
 )
 {
     auto books = this->GetAllBooks();
@@ -55,7 +55,7 @@ std::list<BookModel> LibraryManager::GetFilteredBooks(
 
     for (auto book : books)
     {
-        if (book.CheckFilter(strField, strDesiredValue, bExact))
+        if (book.CheckFilter(field, desiredValue, bExact))
             filteredBooks.push_back(book);
     }
 

@@ -31,19 +31,19 @@ std::function<void()> ConsoleInterface::GetMenuOption()
     cout << ":> ";
     cin >> command;
 
-    int action_index = this->GetActionIndexByCommand(command);
-    if (action_index == -1)
+    int actionIndex = this->GetActionIndexByCommand(command);
+    if (actionIndex == -1)
         return []()
         { cout << "Nieznana komenda" << endl; };
 
-    return this->actions[action_index].action;
+    return this->actions[actionIndex].action;
 }
 
 void ConsoleInterface::AddBook()
 {
     std::string title;
     std::string author;
-    unsigned int year_published;
+    unsigned int yearPublished;
     std::string publisher;
     BookModel *book;
 
@@ -56,12 +56,12 @@ void ConsoleInterface::AddBook()
         cin >> author;
 
         cout << "Podaj rok wydania: ";
-        cin >> year_published;
+        cin >> yearPublished;
 
         cout << "Podaj wydawce: ";
         cin >> publisher;
 
-        book = new BookModel(title, author, year_published, publisher);
+        book = new BookModel(title, author, yearPublished, publisher);
     } while (!BookModel::Validate(*book));
 
     this->library.AddNewBook(*book);
@@ -160,18 +160,18 @@ void ConsoleInterface::ListBooksByFilter()
         return;
     }
 
-    std::string strDesiredValue;
+    std::string desiredValue;
     cout << "Podaj szukana wartosc: ";
-    cin >> strDesiredValue;
+    cin >> desiredValue;
 
-    std::string strExact;
+    std::string exact;
     bool bExact;
     cout << "Czy dopasowanie ma byc czesciowe(n) czy dokladne(y): ";
-    cin >> strExact;
+    cin >> exact;
 
-    if (strExact == "y")
+    if (exact == "y")
         bExact = true;
-    else if (strExact == "n")
+    else if (exact == "n")
         bExact = false;
     else
     {
@@ -179,7 +179,7 @@ void ConsoleInterface::ListBooksByFilter()
         return;
     }
 
-    auto books = this->library.GetFilteredBooks(filter, strDesiredValue, bExact);
+    auto books = this->library.GetFilteredBooks(filter, desiredValue, bExact);
     for (const auto &book : books)
     {
         this->DisplayBook(book);

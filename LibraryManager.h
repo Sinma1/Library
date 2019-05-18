@@ -24,7 +24,7 @@ public:
     void DeleteBook(unsigned int ID);
 
     std::list<BookModel> GetFilteredBooks(
-            const std::string &strField, const std::string &strDesiredValue, const bool &bExact);
+            const std::string &field, const std::string &desiredValue, const bool &bExact);
 
     std::vector<std::string> filters = {"tytul", "autor", "wydanie", "wydawnictwo"};
 

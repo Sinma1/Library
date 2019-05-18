@@ -21,7 +21,7 @@ public:
 
     static bool Validate(BookModel const &book);
 
-    bool CheckFilter(const std::string &strField, const std::string &strDesiredValue, const bool &bExact);
+    bool CheckFilter(const std::string &field, const std::string &desiredValue, const bool &bExact);
 };
 
 

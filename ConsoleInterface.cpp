@@ -3,6 +3,13 @@
 //
 
 #include "ConsoleInterface.h"
+#include <cstdlib>
+
+#ifdef _WIN32
+#define CLEAR "cls"
+#else //In any other OS
+#define CLEAR "clear"
+#endif
 
 void ConsoleInterface::Run()
 {
@@ -72,7 +79,12 @@ void ConsoleInterface::Exit()
     this->bRunning = false;
 }
 
-int ConsoleInterface::GetActionIndexByOptionNum(int num)
+void ConsoleInterface::ClearScreen()
+{
+    system(CLEAR);
+}
+
+int ConsoleInterface::GetActionIndexByCommand(const std::string& command)
 {
     for (int i = 0; i < this->actions.size(); i++)
     {

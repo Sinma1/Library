@@ -17,6 +17,7 @@ void ConsoleInterface::Run()
     {
         auto action = this->GetMenuOption();
         action();
+        cout << endl;
     }
 }
 
@@ -32,7 +33,8 @@ std::function<void()> ConsoleInterface::GetMenuOption()
 
     int action_index = this->GetActionIndexByCommand(command);
     if (action_index == -1)
-        return []() { cout << "Nieznana komenda" << endl; };
+        return []()
+        { cout << "Nieznana komenda" << endl; };
 
     return this->actions[action_index].action;
 }
@@ -68,7 +70,8 @@ void ConsoleInterface::AddBook()
 void ConsoleInterface::ListBooks()
 {
     auto books = this->library.GetAllBooks();
-    if (books.empty()) {
+    if (books.empty())
+    {
         cout << "Brak ksiazek do wyswietlenia." << endl;
         return;
     }
@@ -90,7 +93,7 @@ void ConsoleInterface::ClearScreen()
     system(CLEAR);
 }
 
-int ConsoleInterface::GetActionIndexByCommand(const std::string& command)
+int ConsoleInterface::GetActionIndexByCommand(const std::string &command)
 {
     for (int i = 0; i < this->actions.size(); i++)
     {
@@ -116,7 +119,6 @@ void ConsoleInterface::GetBookDetails()
     {
         cout << e.what() << endl;
     }
-
 }
 
 void ConsoleInterface::DisplayBook(BookModel const &book)
@@ -139,5 +141,47 @@ void ConsoleInterface::DeleteBook()
     catch (const std::exception &e)
     {
         cout << e.what() << endl;
+    }
+}
+
+void ConsoleInterface::ListBooksByFilter()
+{
+    std::string filter;
+    cout << "Podaj pole po jakim chcesz szukac";
+    cout << "(";
+    for (const auto &f : this->library.filters) cout << f << " ";
+    cout << "): ";
+    cin >> filter;
+
+    auto it = std::find(std::begin(this->library.filters), std::end(this->library.filters), filter);
+    if (it == this->library.filters.end())
+    {
+        cout << "Nie znaleziono takiego filtra" << endl;
+        return;
+    }
+
+    std::string strDesiredValue;
+    cout << "Podaj szukana wartosc: ";
+    cin >> strDesiredValue;
+
+    std::string strExact;
+    bool bExact;
+    cout << "Czy dopasowanie ma byc czesciowe(n) czy dokladne(y): ";
+    cin >> strExact;
+
+    if (strExact == "y")
+        bExact = true;
+    else if (strExact == "n")
+        bExact = false;
+    else
+    {
+        cout << "Nie rozpoznana opcja" << endl;
+        return;
+    }
+
+    auto books = this->library.GetFilteredBooks(filter, strDesiredValue, bExact);
+    for (const auto &book : books)
+    {
+        this->DisplayBook(book);
     }
 }

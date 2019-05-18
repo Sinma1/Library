@@ -41,3 +41,15 @@ bool BookModel::Validate(BookModel const &book)
 
     return true;
 }
+//    "tytul", "autor", "wydanie", "wydawnictwo"
+
+bool BookModel::CheckFilter(const std::string &strField, const std::string &strDesiredValue, const bool &bExact)
+{
+    std::string strFieldValue;
+    if (strField == "tytul") strFieldValue = this->title;
+    if (strField == "autor") strFieldValue = this->author;
+    if (strField == "wydanie") strFieldValue = std::to_string(this->year_published);
+    if (strField == "wydawnictwo") strFieldValue = this->publisher;
+
+    return (strFieldValue == strDesiredValue) || (strFieldValue.find(strDesiredValue) != std::string::npos && !bExact);
+}

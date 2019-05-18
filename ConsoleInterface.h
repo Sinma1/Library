@@ -18,7 +18,7 @@ using std::cin;
 class Action
 {
 public:
-    Action(std::function<void()> action, std::string command, std::string description)
+    Action(const std::function<void()> &action, const std::string &command, const std::string &description)
     {
         this->action = action;
         this->command = command;
@@ -42,6 +42,7 @@ public:
                 Action(std::bind(&ConsoleInterface::ListBooks, this), "2", "Wypisz wszystkie ksiazki"),
                 Action(std::bind(&ConsoleInterface::GetBookDetails, this), "3", "Pokaz ksiazke po ID"),
                 Action(std::bind(&ConsoleInterface::DeleteBook, this), "4", "Usun ksiazke"),
+                Action(std::bind(&ConsoleInterface::ListBooksByFilter, this), "5", "Wyszukaj ksiazke"),
 
                 Action(std::bind(&ConsoleInterface::ClearScreen, this), "clear", "Wyczysc konsole"),
                 Action(std::bind(&ConsoleInterface::Exit, this), "exit", "Wyjdz z programu")
@@ -67,7 +68,9 @@ private:
 
     void ClearScreen();
 
-    int GetActionIndexByCommand(const std::string& command);
+    void ListBooksByFilter();
+
+    int GetActionIndexByCommand(const std::string &command);
 
     LibraryManager library;
     bool bRunning = true;

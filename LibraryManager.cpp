@@ -36,6 +36,7 @@ void LibraryManager::DeleteBook(unsigned int ID)
     BookModel *book;
     try
     {
+        // TODO FIX THIS
         *book = this->GetBook(ID);
 //        this->book_list.remove(*book);
     }
@@ -43,4 +44,20 @@ void LibraryManager::DeleteBook(unsigned int ID)
     {
         throw e;
     }
+}
+
+std::list<BookModel> LibraryManager::GetFilteredBooks(
+        const std::string &strField, const std::string &strDesiredValue, const bool &bExact
+)
+{
+    auto books = this->GetAllBooks();
+    std::list<BookModel> filteredBooks;
+
+    for (auto book : books)
+    {
+        if (book.CheckFilter(strField, strDesiredValue, bExact))
+            filteredBooks.push_back(book);
+    }
+
+    return filteredBooks;
 }

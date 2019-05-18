@@ -3,6 +3,7 @@
 //
 #include <list>
 #include <stdexcept>
+#include <vector>
 
 #include "BookModel.h"
 #include "DataSource.h"
@@ -21,6 +22,11 @@ public:
     BookModel GetBook(unsigned int ID);
 
     void DeleteBook(unsigned int ID);
+
+    std::list<BookModel> GetFilteredBooks(
+            const std::string &strField, const std::string &strDesiredValue, const bool &bExact);
+
+    std::vector<std::string> filters = {"tytul", "autor", "wydanie", "wydawnictwo"};
 
 private:
     std::list<BookModel> book_list;

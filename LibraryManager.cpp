@@ -6,43 +6,22 @@
 
 void LibraryManager::AddNewBook(BookModel &book)
 {
-    book.ID = bookList.back().ID + 1;
-    this->bookList.push_back(book);
+    this->dataSource.CreateBook(book);
 }
 
 BookModel LibraryManager::GetBook(unsigned int ID)
 {
-    for (auto const &book : this->bookList)
-    {
-        if (book.ID == ID)
-        {
-            return book;
-        }
-    }
-    throw std::invalid_argument("Nie znaleziono ksiazki o danym ID");
-}
-
-bool LibraryManager::LoadBooksFromSource()
-{
-    return false;
+    return this->dataSource.ReadBook(ID);
 }
 
 std::list<BookModel> LibraryManager::GetAllBooks()
 {
-    return this->bookList;
+    return this->dataSource.ListBooks();
 }
 
 void LibraryManager::DeleteBook(unsigned int ID)
 {
-    try
-    {
-        auto book = this->GetBook(ID);
-        this->bookList.remove(book);
-    }
-    catch (const std::exception &e)
-    {
-        throw e;
-    }
+    this->dataSource.DeleteBook(ID);
 }
 
 std::list<BookModel> LibraryManager::GetFilteredBooks(

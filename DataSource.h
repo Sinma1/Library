@@ -6,6 +6,9 @@
 #define BIBLIOTEKA_DATASOURCE_H
 
 #include <list>
+#include <fstream>
+#include <vector>
+
 #include "Interfaces/IDataSource.h"
 #include "BookModel.h"
 
@@ -14,7 +17,8 @@ class DataSource : IDataSource
 public:
     DataSource();
 
-private:
+    ~DataSource();
+
     void CreateBook(BookModel book) override;
 
     BookModel ReadBook(int id) override;
@@ -23,9 +27,14 @@ private:
 
     std::list<BookModel> ListBooks() override;
 
-
 private:
-    std::list<BookModel> book_list;
+    std::list<BookModel> bookList;
+
+    void loadFromFile();
+
+    void saveToFile();
+
+    std::string fileName = "books.txt";
 };
 
 

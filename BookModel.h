@@ -12,6 +12,7 @@ class BookModel
 {
 public:
     BookModel(std::string title, std::string author, unsigned int year_published, std::string publisher);
+    BookModel(int id, std::string title, std::string author, unsigned int year_published, std::string publisher);
 
     unsigned int ID;
     std::string title;

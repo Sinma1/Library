@@ -16,6 +16,20 @@ BookModel::BookModel(
     this->publisher = publisher;
 }
 
+BookModel::BookModel(
+        int id,
+        std::string title,
+        std::string author,
+        unsigned int year_published,
+        std::string publisher)
+{
+    this->ID = id;
+    this->title = title;
+    this->author = author;
+    this->year_published = year_published;
+    this->publisher = publisher;
+}
+
 bool BookModel::Validate(BookModel const &book)
 {
     if (book.title.length() <= 0 || book.title.length() > 100)

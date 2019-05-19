@@ -32,8 +32,6 @@ private:
     std::list<BookModel> bookList;
 
     DataSource dataSource = DataSource();
-
-    bool LoadBooksFromSource();
 };
 
 

@@ -4,14 +4,15 @@
 
 #include "LibraryManager.h"
 
-void LibraryManager::AddNewBook(const BookModel &book)
+void LibraryManager::AddNewBook(BookModel &book)
 {
-    this->book_list.push_back(book);
+    book.ID = bookList.back().ID + 1;
+    this->bookList.push_back(book);
 }
 
 BookModel LibraryManager::GetBook(unsigned int ID)
 {
-    for (auto const &book : this->book_list)
+    for (auto const &book : this->bookList)
     {
         if (book.ID == ID)
         {
@@ -28,7 +29,7 @@ bool LibraryManager::LoadBooksFromSource()
 
 std::list<BookModel> LibraryManager::GetAllBooks()
 {
-    return this->book_list;
+    return this->bookList;
 }
 
 void LibraryManager::DeleteBook(unsigned int ID)
@@ -36,7 +37,7 @@ void LibraryManager::DeleteBook(unsigned int ID)
     try
     {
         auto book = this->GetBook(ID);
-        this->book_list.remove(book);
+        this->bookList.remove(book);
     }
     catch (const std::exception &e)
     {

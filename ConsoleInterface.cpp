@@ -75,11 +75,12 @@ void ConsoleInterface::ListBooks()
         cout << "Brak ksiazek do wyswietlenia." << endl;
         return;
     }
-
+    cout << "=================================" << endl;
     for (auto const &book : books)
     {
         this->DisplayBook(book);
     }
+    cout << "=================================" << endl;
 }
 
 void ConsoleInterface::Exit()
@@ -137,6 +138,7 @@ void ConsoleInterface::DeleteBook()
     try
     {
         this->library.DeleteBook(id);
+        cout << "Ksiazka zostala usunieta.";
     }
     catch (const std::exception &e)
     {

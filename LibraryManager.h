@@ -15,7 +15,7 @@
 class LibraryManager
 {
 public:
-    void AddNewBook(const BookModel &book);
+    void AddNewBook(BookModel &book);
 
     std::list<BookModel> GetAllBooks();
 
@@ -29,7 +29,7 @@ public:
     std::vector<std::string> filters = {"tytul", "autor", "wydanie", "wydawnictwo"};
 
 private:
-    std::list<BookModel> book_list;
+    std::list<BookModel> bookList;
 
     DataSource dataSource = DataSource();
 

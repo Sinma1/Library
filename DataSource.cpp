@@ -2,7 +2,6 @@
 // Created by Sinma on 07.04.2019.
 //
 
-#include <sstream>
 #include "DataSource.h"
 
 DataSource::DataSource()
@@ -66,12 +65,7 @@ void DataSource::loadFromFile()
     std::string line;
     while (std::getline(file, line))
     {
-        std::vector<std::string> fields;
-        std::stringstream ss(line);
-
-        std::string str;
-        while (std::getline(ss, str, ';'))
-            fields.push_back(str);
+        auto fields = StringHelper::Split(line, ';');
 
         if (fields.size() != 5)
             continue;

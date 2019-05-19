@@ -8,8 +8,10 @@
 #include <list>
 #include <fstream>
 #include <vector>
+#include <sstream>
 
 #include "Interfaces/IDataSource.h"
+#include "Helpers/StringHelper.h"
 #include "BookModel.h"
 
 class DataSource : IDataSource
